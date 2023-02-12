@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define pop pop_back
+#define ll long long
+int n, k;
+int a[505];
+int visited[505] = {};
+char c;
+vector<char> tmp;
+
+vector<pair<char, char>> ans;
+
+bool check(vector<char> tmp)
+{
+    for (int i = 1; i < tmp.size() - 1; i++)
+    {
+        if (tmp[i] == 'A' || tmp[i] == 'E')
+        {
+            if (tmp[i - 1] != 'A' && tmp[i - 1] != 'E' && tmp[i + 1] != 'A' && tmp[i + 1] != 'E')
+                return 0;
+        }
+    }
+    return 1;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> c;
+    n = c - 'A';
+    vector<char> tmp(n + 1);
+    iota(tmp.begin(), tmp.end(), 'A');
+    do
+    {
+        if (check(tmp))
+        {
+            for (auto x : tmp)
+            {
+                cout << x;
+            }
+            cout << endl;
+        }
+    } while (next_permutation(tmp.begin(), tmp.end()));
+}
