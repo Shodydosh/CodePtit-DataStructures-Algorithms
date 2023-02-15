@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define pop pop_back
+#define ll long long
+
+map<ll, ll> fiboMap;
+long long M = 1000000007;
+int a[1005];
+long long f(int n)
+{
+    if (fiboMap.count(n))
+        return fiboMap[n];
+    long long k = n / 2;
+    if (n % 2 == 0)
+        return fiboMap[n] = (f(k) * f(k) + f(k - 1) * f(k - 1)) % M;
+    else
+        return fiboMap[n] = (f(k) * f(k + 1) + f(k - 1) * f(k)) % M;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        fiboMap[0] = 1;
+        fiboMap[1] = 1;
+        int n;
+        cin >> n;
+        cout << ((n == 0) ? 0 : f(n - 1)) << endl;
+    }
+}
