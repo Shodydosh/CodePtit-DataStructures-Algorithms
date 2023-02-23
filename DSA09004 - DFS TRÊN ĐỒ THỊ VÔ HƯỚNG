@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, k, s;
+int a, b;
+
+void dfs(vector<int> adj[], int src, int visited[])
+{
+    cout << src << " ";
+    visited[src] = 1;
+
+    for (int i = 0; i < adj[src].size(); i++)
+    {
+        int tmp = adj[src][i];
+        if (!visited[tmp])
+        {
+            dfs(adj, tmp, visited);
+        }
+    }
+}
+
+main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n >> k >> s;
+        int visited[n + 1] = {};
+        vector<int> adj[n + 1];
+        for (int i = 0; i < k; i++)
+        {
+            cin >> a >> b;
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+
+        dfs(adj, s, visited);
+        cout << endl;
+    }
+}
