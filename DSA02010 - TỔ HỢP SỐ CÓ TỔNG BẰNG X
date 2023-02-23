@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long M = 1000000007;
+int a[1000], c[1000];
+int n, target, OK = 0;
+int maxVal = INT_MIN;
+
+void in(int i)
+{
+    cout << '[';
+    for (int j = 1; j <= i - 2; j++)
+        cout << c[j] << ' ';
+    cout << c[i - 1];
+    cout << ']';
+}
+
+void Try(int i, int S)
+{
+    if (S > target)
+        return;
+    if (S == target)
+    {
+        OK = 1;
+        in(i);
+        return;
+    }
+
+    for (int j = 1; j <= n; j++)
+        if (a[j] >= c[i - 1])
+        {
+            c[i] = a[j];
+            Try(i + 1, S + a[j]);
+        }
+}
+
+main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n >> target;
+        for (int i = 1; i <= n; i++)
+            cin >> a[i];
+        Try(1, 0);
+        if (OK == 0)
+            cout << -1;
+        cout << endl;
+    }
+}
